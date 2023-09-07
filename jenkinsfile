@@ -55,10 +55,24 @@ pipeline{
             steps{
                 script{
                     sh """
-                    cat deployment.yml
                     sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yml
                     cat deployment.yml
                     """
+                }
+            }
+        }
+        stage('push the changed deployment file to git'){
+            steps{
+                script{
+                    sh """
+                    git config --global user.name "proffdeep"
+                    git config --global user.email "deepch98@gmail.com"
+                    git add deployment.yml
+                    git commit -m "add updated deployment file to GH"
+                    """
+                    withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
+                              sh "git push -u origin main"
+                                }
                 }
             }
         }
@@ -66,3 +80,5 @@ pipeline{
     }
 }
 
+// HWztv43c1vTg1fHC
+//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
