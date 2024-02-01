@@ -1,10 +1,6 @@
 name: WC_Deploy
 on:
-  workflow_call:
-    secrets:
-      GHA_PAT:
-        required: true
-  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
     inputs:
       PROJECT_NAME:
         description: 'Project Level'
@@ -18,11 +14,13 @@ on:
         description: 'Select the service release branch to checkout the code repo'
         required: true
         type: string
+
 permissions:
   contents: read
   id-token: write
   issues: write
   pull-requests: write
+
 jobs:
   process_app_name:
     runs-on: ubuntu-latest
