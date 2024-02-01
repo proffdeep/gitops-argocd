@@ -23,3 +23,16 @@ permissions:
   id-token: write
   issues: write
   pull-requests: write
+jobs:
+  process_app_name:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up variables
+      id: vars
+      run: |
+        echo "::set-output name=processed_name::${{ github.event.inputs.APP_NAME//./d }}"
+      shell: bash
+
+    - name: Display processed APP_NAME
+      run: echo "Processed APP_NAME: ${{ steps.vars.outputs.processed_name }}"
