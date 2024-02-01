@@ -1,4 +1,5 @@
 name: WC_Deploy
+
 on:
   workflow_dispatch:
     inputs:
@@ -34,3 +35,4 @@ jobs:
 
     - name: Display processed APP_NAME
       run: echo "Processed APP_NAME: ${{ steps.vars.outputs.processed_name }}"
+
